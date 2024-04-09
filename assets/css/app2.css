@@ -1,0 +1,22 @@
+
+
+.nav{
+    display: flex;
+    padding: 20px;
+    background-color: #333;
+}
+.logo{
+    margin-top: -18px;
+    width: 140px;
+    height: 130px;
+    border-radius: 200px;
+}
+.title{
+    margin-left: 20px;
+    color: white;
+}
+.nav2{
+    display: flex;
+    padding: 20px;
+}
+
