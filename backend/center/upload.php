@@ -1,3 +1,9 @@
+<?php
+include '../dbconnect.php';
+
+    error_reporting(0);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,6 +136,60 @@
 
         </nav>
            <div class="cont">
+           <li>
+        <a class="upload-icon" onclick="op()" href="#">
+          <i class="fas fa-fw fa-upload"></i>
+</a>
+      </li>
+
+            <center>
+              <h2 style="color: white;">UPLOADED WEEKS</h2><br>
+    <table style="color: white; border: 2px solid white; width: 580px;">
+        <tr>
+            <td style="width: 70px;"><img src="../../assets/images/folder.png" alt=""></td>
+            <td rowspan="2" style="width: 340px;">This Week7 is uploaded on 12/05/2023.This Week7 is uploaded on 12/05/2023</td>
+            <td rowspan="2"><span><button>Delete</button></span>&nbsp;&nbsp;&nbsp;<span><button>Update</button></span></td>
+        </tr>
+        <tr>
+            <td>Week7</td>
+        </tr>
+    </table>
+
+</center>
+<div id="overop"><br><br><br><br><br><br>
+  <div class="ser">
+<center>
+    <br>
+<form method="post" enctype="multipart/form-data">
+  <button onclick="off()" class="close">&times</button>
+    <h2 style="color: white;">UPLOADING MOVIE WEEKS</h2>
+<input type="text" name="week_name" id="week_name" placeholder="Enter Name Of Week" required><br><br>
+<textarea name="description" id="description" cols="30" rows="5" placeholder="Discription of Week Here" required></textarea><br><br>
+<input type="file" name="uploadfile" class="file" id="file" required><br><br>
+<button type="submit" name="upload" id="button"><span><i class="fas fa-fw fa-upload"></i></span>
+<span>Upload</span>
+</button>
+</form>
+<?php
+//file directory
+$filename = $_FILES["uploadfile"]["name"];
+$tempname = $_FILES["uploadfile"] ["tmp_name"];
+$folder = "../uploads/".$filename;
+move_uploaded_file($tempname, $folder);
+
+//insert into db
+if (isset($_POST['upload'])) {
+$week_name = $_POST['week_name'];
+$description = $_POST['description'];
+$sql = "INSERT INTO upload (week_name, description, file)"."VALUES('$week_name', '$description','$folder')";
+mysqli_query($dbconnection,$sql);
+}
+?>
+
+
+</center>
+</div>
+</div>
 
            </div>
       
@@ -175,6 +235,61 @@
   <script src="../../assets/dashboard/js/demo/chart-area-demo.js"></script>
   <script src="../../assets/dashboard/js/demo/chart-pie-demo.js"></script>
 <style>
+
+  .close {
+    margin-right: 40px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  cursor: pointer;
+}
+  .ser{
+    background-color: #333;
+    width: 80%;
+    color: white;
+    height: 420px;
+    margin: auto;
+    border-radius: 8px;
+    font-size: 16px
+}
+
+   #button{
+        border-radius: 8px;
+        margin-right: 408px;
+    }
+    #button:hover{
+        color: white;
+        background-color: #333;
+    }
+    #week_name{
+        width: 500px;
+        border-radius: 5px;
+    }
+    #description{
+        width: 500px;
+        border-radius: 5px;
+
+    }
+    .file{
+        margin-right: 204px;
+    }
+    #file{
+        border-radius: 6px;
+    }
+  .upload-icon{
+    color: white;
+    font-size: 25px;
+    margin-left: 900px;
+  }
+  .upload-icon:hover{
+    color: gray;
+  }
   .logo{
     margin-left: 40px;
     height: 140px;
@@ -223,9 +338,32 @@
   font-size: 20px;
 
 }
+#overop {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7
+  );
+  z-index: 2;
+  cursor: pointer;
+}
 
 
 </style>
+<script>
+function op() {
+  document.getElementById("overop").style.display = "block";
+}
+function off() {
+  document.getElementById("overop").style.display = "none";
+}
+</script>
+
 </body>
 
 </html>

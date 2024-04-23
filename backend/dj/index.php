@@ -1,3 +1,6 @@
+<?php
+include '../numbers.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,12 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Yxon|Dj Dashboard</title>
+  <title>Yxon|Dj Dashboard,
+    <?php
+    include 'usernames.php';
+    echo $username;
+    ?>
+  </title>
 
   <!-- Custom fonts for this template-->
   <link href="../../assets/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -97,7 +105,7 @@
       <hr class="sidebar-divider d-none d-md-block">
                 <span class="mr-2 d-none d-lg-inline text-gray-600" style="text-transform: capitalize;"></span>
                 <img class="profile" src="../../assets/dashboard/images/profile.png">
-                <h3 class="prcont">Admin</h3>
+                <h3 class="prcont"><?php     echo $username;?></h3>
                 <h3 class="pr2cont">online</h3>
 
             </li>
@@ -144,7 +152,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">UPLOADED WEEKS</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $queryuploaded;?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-upload fa-2x text-gray-300"></i>
